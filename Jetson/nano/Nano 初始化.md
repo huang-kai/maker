@@ -5,18 +5,19 @@ nano开发板使用M.2 key接口网卡，打开开发板，网卡接口在芯片
 ### 1.2 安装风扇
 nano开发板上有四针带PWM功能的风扇接口，插入PWM风扇，并把风扇固定在散热器上。（注意如果不做设置，风扇是不会自己转的，后面介绍如何根据温度自动启动风扇）
 ## 2. SD卡初始化
-首先去官网下载一个nano镜像，找一个读卡器插入SD卡，如果是空白卡，win11系统能认识并弹出U盘信息，使用SD card formatter会把SD卡格式化成Exfat格式。如果是Mac系统，选择格式化即可。打开烧录镜像软件[balenaEtcher](https://www.balena.io/etcher>)按照界面步骤烧录下载好的镜像，等完成后SD卡就准备完成了。  
+首先去官网下载一个nano镜像，找一个读卡器插入SD卡，如果是空白卡，win11系统能认识并弹出U盘信息，使用SD card formatter会把SD卡格式化成Exfat格式。如果是Mac系统，选择格式化即可。打开烧录镜像软件[balenaEtcher](https://www.balena.io/etcher)按照界面步骤烧录下载好的镜像，等完成后SD卡就准备完成了。  
 
-### 2.1 使用Ubuntu 20.04版本镜像，可以参考[这篇文章](https://qengineering.eu/install-ubuntu-20.04-on-jetson-nano.html),或者直接[下载镜像]()  
+### 2.1 使用Ubuntu 20.04版本镜像
+可以参考[这篇文章](https://qengineering.eu/install-ubuntu-20.04-on-jetson-nano.html),或者直接[下载镜像]()  
 
 ## 3. 初次启动
 把烧录好镜像的SD卡插入芯片板的插槽，注意不是开发板上。Nano支持3种供电方式  
 
-    1. 5V2A的USB供电，最大功率10w
-    2. 5V3A的GPIO供电，最大功率12W
-    3. 5V3A的DC供电，最大功率15W  
+    1. 5V2A的USB供电，最大功率5w
+    2. 5V3A的GPIO供电，最大功率7W
+    3. 5V4A的DC供电，最大功率12W  
 
-推荐使用带开关的5V3A的DC供电，这样可以得到最大的使用性能。  
+推荐使用带开关的5V4A的DC供电，这样可以得到最大的使用性能。如果使用DC供电，需要注意要把J48的两根柱的跳帽链接上（开始跳帽只插了一根柱）  
 插入电源后，就等待出现Nvidia的启动画面，设置一些初始参数后便进入了系统。官方镜像使用18.20的Ubuntu版本，可以通过命令查看:
 ```
 cat /etc/os-release
