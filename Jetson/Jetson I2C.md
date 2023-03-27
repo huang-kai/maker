@@ -57,7 +57,8 @@ device.connstring = "pn532_i2c:/dev/i2c-1"
 ```
 
 ### 2.5 硬件连接
-如图所示
+如图所示  
+![](resources/rpi_pn532_9.webp)
 
 ### 2.6 读写NFC
 至此，配置已经完成
