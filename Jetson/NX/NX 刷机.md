@@ -1,7 +1,7 @@
 # NX 刷机教程
 ## 刷入Jetson Linux（L4T）
 ### 1. 命令行刷入（仅适合于符合官方载板设计的自研载板）
-从官网查找[JetPack](https://developer.nvidia.com/embedded/jetpack-archive)最新版，这里使用JetPack5.1.1（L4T 35.3.1）举例。此版本支持新发的Orin NX系列和Orin Nano Developer Kit 但需要注意的事Orin NX系列默认使用Orin Nano Developer Kit载板，但不影响Orin Nx使用。 
+从官网查找[JetPack](https://developer.nvidia.com/embedded/jetpack-archive)最新版，这里使用JetPack5.1.1（L4T 35.3.1）举例。此版本支持新发的Orin NX系列和Orin Nano Developer Kit 但需要注意的是：Orin NX系列默认使用Orin Nano Developer Kit载板，但不影响Orin Nx使用。 
 ### 1.1 初始准备环境变量说明
 1. 刷机必须使用一台Ubuntu 20.04 LTS或者Ubunt 18.04 LTS的PC或虚拟机。  
 2. 环境变量说明： 
