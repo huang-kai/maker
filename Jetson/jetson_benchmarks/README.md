@@ -24,7 +24,6 @@ Following scripts are included:
 - TensorRT 7+ <br />
 
 ### Set up instructions
-``` git clone https://github.com/NVIDIA-AI-IOT/jetson_benchmarks.git``` <br />
 ``` cd jetson_benchmarks ``` <br />
 ``` mkdir models ``` # Open folder to store models (Optional) <br />
 
