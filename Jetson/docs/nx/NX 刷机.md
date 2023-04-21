@@ -22,10 +22,14 @@
     $ sudo ./apply_binaries.sh
     $ sudo ./tools/l4t_flash_prerequisites.sh
     ```
-3. 硬件安装完成后先不要急着上电，在符合官方标准的载板上用跳帽短接9和10针脚（FC REC和GND），如图下图 ，使其进入恢复模式（Force Recovery Mode）  
+3. 修改修改 `Linux_for_Tegra/bootloader/t186ref/BCT/tegra234-mb2-bct-misc-p3767-0000.dts` 文件中的 内容为如下值：
+    ```
+    cvb_eeprom_read_size = <0x0>
+    ```
+4. 硬件安装完成后先不要急着上电，在符合官方标准的载板上用跳帽短接9和10针脚（FC REC和GND），如图下图 ，使其进入恢复模式（Force Recovery Mode）  
 ![](../resources/recovery_mode.png)   
-然后上电，此时会进入恢复模式，**[注意]** 此时可以去掉9和10针脚的跳帽。
-4. 把USB线一头插入载板Type-C接口（其他USB口不支持恢复模式下连接），一头插上电脑（如果使用的是虚拟机，让usb接入虚拟机）。现在确认一下usb是否识别成功，输入：`lsusb`，如果出现：
+然后上电，此时会进入恢复模式。
+5. 把USB线一头插入载板Type-C接口（其他USB口不支持恢复模式下连接），一头插上电脑（如果使用的是虚拟机，让usb接入虚拟机）。现在确认一下usb是否识别成功，输入：`lsusb`，如果出现：
     ```
     Bus <bbb> Device <ddd>: ID 0955: <nnnn> Nvidia Corp 
 
@@ -46,11 +50,8 @@
             7019 for Jetson AGX Xavier Industrial (P2888-0008)
             7e19 for Jetson Xavier NX (P3668)
     ```
-5. 修改修改 `Linux_for_Tegra/bootloader/t186ref/BCT/tegra234-mb2-bct-misc-p3767-0000.dts` 文件中的 内容为如下值：
-    ```
-    cvb_eeprom_read_size = <0x0>
-    ```
-6. 输入以下命令开始刷机：  
+6. 此时可以去掉9和10针脚的跳帽。
+7. 输入以下命令开始刷机：  
     刷入NVMe中
     ```
     sudo ./tools/kernel_flash/l4t_initrd_flash.sh --external-device nvme0n1p1 \
@@ -59,7 +60,7 @@
     ```
     重刷可以加入 `--erase-all`参数，不过没有测试过。
     命令执行后，会有很多软件需要安装，根据提示安装完再重复执行，直到日志开始不停滚动，刷机开始为止。
-7. 完成后Jetson会自动重启，重启后进行一些用户名密码的设置，刷机就成功了。
+8. 完成后Jetson会自动重启，重启后进行一些用户名密码的设置，刷机就成功了。
 ## 2. 安装Jetpack
 ### 2.1 SDK Manager安装
 在安装机上下载SDK Manager，图形化界面，选择相应的套件，根据提示下一步即可。  
@@ -70,6 +71,29 @@
 sudo apt install nvidia-jetpack
 ```
 时间会持续较长，取决于网络，等待安装完成。
+
+### 2.3 升级
+```
+#升级cuda
+wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/arm64/cuda-keyring_1.0-1_all.deb
+sudo dpkg -i cuda-keyring_1.0-1_all.deb
+sudo apt-get update
+sudo apt-get install cuda=11.8.0-1
+
+```
+如果出现安装错误，例如：
+```
+Unpacking cuda-nvml-dev-11-8 (11.8.86-1) ...
+dpkg: error processing archive /tmp/apt-dpkg-install-iGJdtT/18-cuda-nvml-dev-11-8_11.8.86-1_arm64.deb (--unpack):
+ trying to overwrite '/usr/local/cuda-11.8/include', which is also in package cuda-cccl-11-8 11.8.89-1
+```
+需要手动强制安装
+```
+wget https://developer.download.nvidia.com/compute/cuda/11.8.0/local_installers/cuda-tegra-repo-ubuntu2004-11-8-local_11.8.0-1_arm64.deb
+sudo dpkg -i cuda-tegra-repo-ubuntu2004-11-8-local_11.8.0-1_arm64.deb
+sudo dpkg -i --force-overwrite cuda-nvml-dev-11-8_11.8.86-1_arm64.deb
+```
+
 ### 2.3 验证安装
 ```
 # CUDA
