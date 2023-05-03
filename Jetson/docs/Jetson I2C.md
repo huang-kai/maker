@@ -62,7 +62,10 @@ device.connstring = "pn532_i2c:/dev/i2c-1"
 如图所示  
 ![](resources/rpi_pn532_9.webp)
 
-注意：Orin对应的3，5针脚对应的是I2C8，目前没法读取数据，需要连接27，28针脚。
+注意：Orin系列对应的3，5针脚对应的是I2C8，目前没法读取数据，需要连接27，28针脚。具体可以参考:
+```
+sudo /opt/nvidia/jetson-io/jetson-io.py
+```
 ### 2.6 读写NFC
 至此，配置已经完成
 使用命令进行测试：
