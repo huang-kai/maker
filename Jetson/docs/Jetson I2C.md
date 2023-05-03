@@ -25,13 +25,15 @@ cd ~/Download
 wget https://github.com/nfc-tools/libnfc/releases/download/libnfc-1.8.0/libnfc-1.8.0.tar.bz2
 tar -xf libnfc-1.8.0.tar.bz2
 cd libnfc-1.8.0 
-./configure
-make && make install
+./configure --prefix=/usr --sysconfdir=/etc
+make &&sudo make install
+
+# ubuntu系统需要拷贝权限文件
+sudo cp contrib/udev/93-pn53x.rules /lib/udev/rules.d/
 ```
 ### 2.4 配置nfc
 ```
-cd /etc
-sudo mkdir nfc
+sudo mkdir /etc/nfc
 sudo vim /etc/nfc/libnfc.conf
 
 # Allow device auto-detection (default: true)
@@ -60,10 +62,23 @@ device.connstring = "pn532_i2c:/dev/i2c-1"
 如图所示  
 ![](resources/rpi_pn532_9.webp)
 
+注意：Orin对应的3，5针脚对应的是I2C8，目前没法读取数据，需要连接27，28针脚。
 ### 2.6 读写NFC
 至此，配置已经完成
 使用命令进行测试：
 ```
+sudo i2cdetect -y -r -a 1
+     0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f
+00: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+10: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+20: -- -- -- -- 24 -- -- -- -- -- -- -- -- -- -- --
+30: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+40: UU -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+50: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+60: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+70: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+# 没有全部--说明连接成功
+
 nfc-list
 # 如果nfc上有卡，则会读取卡中信息
 ```
@@ -95,7 +110,7 @@ make
 # 进行破解
 sudo ./mfcuk -C -R 0:A -s 250 -S 250 -v 3
 # 破解过程很久，直到出现
-INFO: block 4 recovered KEY: 3c5d7f1e
+INFO: block 4 recovered KEY: 3c5d7f1e.
 ```
 得到第一个 key 之后，我就可以跟退出 mfcuk ，通过获取到的 key，使用 mfoc 进行再次解密
 ```
