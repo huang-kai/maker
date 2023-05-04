@@ -62,6 +62,35 @@
     命令执行后，会有很多软件需要安装，根据提示安装完再重复执行，直到日志开始不停滚动，刷机开始为止。
 8. 完成后Jetson会自动重启，重启后进行一些用户名密码的设置，刷机就成功了。
 ## 2. 安装Jetpack
+### 2.1 换源
+更换apt源
+```
+# 备份源文件
+sudo cp /etc/apt/sources.list /etc/apt/sources.list.bak
+
+# 使用国内源替换
+sudo vim /etc/apt/sources.list
+
+# 默认注释了源码镜像以提高 apt update 速度，如有需要可自行取消注释
+deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu-ports/ focal main restricted universe multiverse
+# deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu-ports/ focal main restricted universe multiverse
+deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu-ports/ focal-updates main restricted universe multiverse
+# deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu-ports/ focal-updates main restricted universe multiverse
+deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu-ports/ focal-backports main restricted universe multiverse
+# deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu-ports/ focal-backports main restricted universe multiverse
+
+# deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu-ports/ focal-security main restricted universe multiverse
+# # deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu-ports/ focal-security main restricted universe multiverse
+
+deb http://ports.ubuntu.com/ubuntu-ports/ focal-security main restricted universe multiverse
+# deb-src http://ports.ubuntu.com/ubuntu-ports/ focal-security main restricted universe multiverse
+
+# 预发布软件源，不建议启用
+# deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu-ports/ focal-proposed main restricted universe multiverse
+# # deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu-ports/ focal-proposed main restricted universe multiverse
+
+$ sudo apt update
+```
 ### 2.1 SDK Manager安装
 在安装机上下载SDK Manager，图形化界面，选择相应的套件，根据提示下一步即可。  
 **[注意]** 选择安装软件时需要跳过Jetson Linux
@@ -74,7 +103,7 @@ sudo apt install nvidia-jetpack
 
 ### 2.3 升级
 ```
-#升级cuda
+#升级cuda，目前还有些问题
 wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/arm64/cuda-keyring_1.0-1_all.deb
 sudo dpkg -i cuda-keyring_1.0-1_all.deb
 sudo apt-get update
