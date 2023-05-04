@@ -32,6 +32,78 @@ make &&sudo make install
 sudo cp contrib/udev/93-pn53x.rules /lib/udev/rules.d/
 ```
 ### 2.4 配置nfc
+每一代的Jetson针脚对应的编号不一样，Nano系列只有8个I2C的接口，但Orin系列有12个I2C。首先需要寻找Jetson上IO的编号：
+```
+sudo /opt/nvidia/jetson-io/jetson-io.py
+# 选：Configure Jetson 40pin Header
+ =================== Jetson Expansion Header Tool ===================
+ |                                                                    |
+ |                                                                    |
+ |                      3.3V (  1) .. (  2) 5V                        |
+ |                      i2c8 (  3) .. (  4) 5V                        |
+ |                      i2c8 (  5) .. (  6) GND                       |
+ |                    unused (  7) .. (  8) uarta                     |
+ |                       GND (  9) .. ( 10) uarta                     |
+ |                    unused ( 11) .. ( 12) unused                    |
+ |                    unused ( 13) .. ( 14) GND                       |
+ |                    unused ( 15) .. ( 16) unused                    |
+ |                      3.3V ( 17) .. ( 18) unused                    |
+ |                    unused ( 19) .. ( 20) GND                       |
+ |                    unused ( 21) .. ( 22) unused                    |
+ |                    unused ( 23) .. ( 24) unused                    |
+ |                       GND ( 25) .. ( 26) unused                    |
+ |                      i2c2 ( 27) .. ( 28) i2c2                      |
+ |                    unused ( 29) .. ( 30) GND                       |
+ |                    unused ( 31) .. ( 32) unused                    |
+ |                    unused ( 33) .. ( 34) GND                       |
+ |                    unused ( 35) .. ( 36) unused                    |
+ |                    unused ( 37) .. ( 38) unused                    |
+ |                       GND ( 39) .. ( 40) unused                    |
+ |                                                                    |
+ |                                                                    |
+ |                        Jetson 40pin Header:                        |
+ |                                                                    |
+ |                 Configure for compatible hardware                  |
+ |                   Configure header pins manually                   |
+ |                                Back                                |
+ |                                                                    |
+ |                                                                    |
+  ====================================================================
+```
+可以看到3，5针脚对应的编号是i2c8。同时可以列出所有i2c
+```
+$ i2cdetect -l
+
+i2c-3	i2c       	3190000.i2c                     	I2C adapter
+i2c-10	i2c       	i2c-2-mux (chan_id 1)           	I2C adapter
+i2c-1	i2c       	c240000.i2c                     	I2C adapter
+i2c-8	i2c       	31e0000.i2c                     	I2C adapter
+i2c-6	i2c       	31c0000.i2c                     	I2C adapter
+i2c-4	i2c       	Tegra BPMP I2C adapter          	I2C adapter
+i2c-11	i2c       	NVIDIA SOC i2c adapter 0        	I2C adapter
+i2c-2	i2c       	3180000.i2c                     	I2C adapter
+i2c-0	i2c       	3160000.i2c                     	I2C adapter
+i2c-9	i2c       	i2c-2-mux (chan_id 0)           	I2C adapter
+i2c-7	i2c       	c250000.i2c                     	I2C adapter
+i2c-5	i2c       	31b0000.i2c                     	I2C adapter
+```
+我们可以扫描一下8号设备
+```
+$ sudo i2cdetect -y -r -a 8
+     0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f
+00: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+10: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+20: -- -- -- -- 24 -- -- -- -- -- -- -- -- -- -- --
+30: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+40: UU -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+50: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+60: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+70: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+
+```
+如果全是“--”则说明没有连接上设备。  
+
+生成配置文件：
 ```
 sudo mkdir /etc/nfc
 sudo vim /etc/nfc/libnfc.conf
@@ -55,33 +127,17 @@ log_level = 1
 # To set a default device, users must set both name and connstring for their device
 # Note: if autoscan is enabled, default device will be the first device available in device list.
 device.name = "Itead_PN532"
-device.connstring = "pn532_i2c:/dev/i2c-1"
+device.connstring = "pn532_i2c:/dev/i2c-8"
 ```
 
 ### 2.5 硬件连接
 如图所示  
 ![](resources/rpi_pn532_9.webp)
 
-注意：Orin系列对应的3，5针脚对应的是I2C8，目前没法读取数据，需要连接27，28针脚。具体可以参考:
-```
-sudo /opt/nvidia/jetson-io/jetson-io.py
-```
 ### 2.6 读写NFC
 至此，配置已经完成
 使用命令进行测试：
 ```
-sudo i2cdetect -y -r -a 1
-     0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f
-00: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-10: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-20: -- -- -- -- 24 -- -- -- -- -- -- -- -- -- -- --
-30: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-40: UU -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-50: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-60: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-70: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-# 没有全部--说明连接成功
-
 nfc-list
 # 如果nfc上有卡，则会读取卡中信息
 ```
