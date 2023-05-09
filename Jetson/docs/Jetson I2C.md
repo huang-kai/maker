@@ -105,8 +105,8 @@ $ sudo i2cdetect -y -r -a 8
 
 生成配置文件：
 ```
-sudo mkdir /etc/nfc
-sudo vim /etc/nfc/libnfc.conf
+sudo mkdir -P /usr/local/etc/nfc
+sudo vim /usr/local/etc/nfc/libnfc.conf
 
 # Allow device auto-detection (default: true)
 # Note: if this auto-detection is disabled, user has to manually set a device
@@ -138,6 +138,7 @@ device.connstring = "pn532_i2c:/dev/i2c-8"
 至此，配置已经完成
 使用命令进行测试：
 ```
+LIBNFC_LOG_LEVEL=3 nfc-list -v
 nfc-list
 # 如果nfc上有卡，则会读取卡中信息
 ```
