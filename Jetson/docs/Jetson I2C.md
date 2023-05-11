@@ -127,7 +127,7 @@ log_level = 1
 # To set a default device, users must set both name and connstring for their device
 # Note: if autoscan is enabled, default device will be the first device available in device list.
 device.name = "Itead_PN532"
-device.connstring = "pn532_i2c:/dev/i2c-8"
+device.connstring = "pn532_i2c:/dev/i2c-7"
 ```
 
 ### 2.5 硬件连接
@@ -141,6 +141,14 @@ device.connstring = "pn532_i2c:/dev/i2c-8"
 LIBNFC_LOG_LEVEL=3 nfc-list -v
 nfc-list
 # 如果nfc上有卡，则会读取卡中信息
+nfc-list uses libnfc 1.8.0
+NFC device: Itead_PN532 opened
+1 ISO14443A passive target(s) found:
+ISO/IEC 14443A (106 kbps) target:
+    ATQA (SENS_RES): 00  04
+       UID (NFCID1): 86  45  c4  9f
+      SAK (SEL_RES): 28
+                ATS: 78  80  b0  02  20  90  00  00  00  00  00  86  45  c4  9f
 ```
 如果门禁卡的 SAK 是 08，是可以被mfoc破解复制的，如果为 20 的话，需要使用mfuck
 ```
