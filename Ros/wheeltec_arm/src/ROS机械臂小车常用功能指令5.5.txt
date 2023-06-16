@@ -1,0 +1,77 @@
+*车型修改
+wheeltec_arm工作空间下
+wheeltec_arm_pick→launch→base_serial.launch文件中修改car_mode后面的default值，车型对应的值如下：
+迷你麦轮四自由度机械臂：mini_mec_four_arm
+迷你四驱四自由度机械臂：mini_4wd_four_arm
+迷你履带车四自由度机械臂：mini_tank_four_arm
+
+迷你麦轮六自由度机械臂：mini_mec_six_arm
+迷你四驱六自由度机械臂：mini_4wd_six_arm
+
+-----------------四自由度机械臂功能---------------------------
+1.机械臂正解
+roslaunch arm_demo fk_demo.launch
+
+2.机械臂逆解
+roslaunch arm_demo ik_demo.launch
+
+3.机械臂笛卡尔空间路径
+roslaunch arm_demo cartesian_demo.launch
+
+4.小车夹取色块调试
+roslaunch wheeltec_arm_pick test_param.launch
+查看色块位置信息
+远程登录至小车端：
+rostopic echo /object_tracker/current_position
+
+5.小车夹取色块
+roslaunch wheeltec_arm_pick arm_pick_color.launch
+
+6.键盘控制
+roslaunch wheeltec_arm_rc four_arm_keyboard_teleop.launch
+
+7.HSV阈值调参
+roslaunch wheeltec_arm_pick    color_hsv_adjust.launch
+
+8.机械臂虚拟空间避障
+roslaunch wheeltec_arm_pick    virtual_space_bostacle_avoidance.launch 
+
+-----------------四自由度机械臂功能---------------------------
+
+-----------------六自由度机械臂功能---------------------------
+
+1.小车夹取色块调试
+roslaunch wheeltec_arm_pick test_param.launch
+查看色块位置信息
+远程登录至小车端：
+rostopic echo /object_tracker/current_position
+2.小车夹取色块
+roslaunch wheeltec_arm_pick arm_pick_color.launch
+
+3.人脸跟随
+roslaunch  wheeltec_tracker_pkg   face_tracking.launch
+
+4.色块跟随
+roslaunch wheeltec_tracker_pkg  color_tracking.launch
+
+5.手势识别
+roslaunch wheeltec_tracker_pkg gesture_recognition.launch
+
+6.HSV阈值调参
+roslaunch wheeltec_arm_pick    color_hsv_adjust.launch
+
+7.机械臂虚拟空间避障
+roslaunch wheeltec_arm_pick    virtual_space_bostacle_avoidance.launch 
+
+8.机械臂正解例程
+roslaunch  arm_demo  fk_demo.launch
+
+9.机械臂逆解例程
+roslaunch  arm_demo  ik_demo.launch
+
+10.机械臂笛卡尔空间路径
+roslaunch arm_demo cartesian_demo.launch
+
+11.键盘控制
+roslaunch wheeltec_arm_rc six_arm_keyboard_teleop.launch
+-----------------六自由度机械臂功能---------------------------
