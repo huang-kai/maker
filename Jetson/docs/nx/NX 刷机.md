@@ -56,9 +56,8 @@
     ```
     sudo ./tools/kernel_flash/l4t_initrd_flash.sh --external-device nvme0n1p1 \
     -c tools/kernel_flash/flash_l4t_external.xml -p "-c bootloader/t186ref/cfg/flash_t234_qspi.xml" \
-    --showlogs --network usb0 jetson-orin-nano-devkit internal
+    --showlogs --erase-all --network usb0 jetson-orin-nano-devkit internal
     ```
-    重刷可以加入 `--erase-all`参数，不过没有测试过。
     命令执行后，会有很多软件需要安装，根据提示安装完再重复执行，直到日志开始不停滚动，刷机开始为止。
 8. 完成后Jetson会自动重启，重启后进行一些用户名密码的设置，刷机就成功了。
 ## 2. 安装Jetpack

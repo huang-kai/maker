@@ -10,7 +10,7 @@ sudo python3 setup.py install
 ```
 sudo groupadd -f -r gpio
 sudo usermod -a -G gpio <your_user_name>
-sudo cp /opt/nvidia/jetson-gpio/lib/python/Jetson/GPIO/99-gpio.rules   /etc/udev/rules.d/
+sudo cp /opt/nvidia/jetson-gpio/lib/python/Jetson/GPIO/99-gpio.rules /etc/udev/rules.d/
 sudo udevadm control –reload-rules && sudo udevadm trigger
 ```
 
