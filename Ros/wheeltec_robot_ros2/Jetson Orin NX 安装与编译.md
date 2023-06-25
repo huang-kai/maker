@@ -67,8 +67,8 @@ python3 -m pip install -U importlib-metadata importlib-resources
 
 # 设置环境变量
 vim ~/.zshrc
-# alias initros1=” source /opt/ros/noetic/setup.zsh”
-alias initros2=” source /opt/ros/galactic/setup.zsh”
+# alias initros1="source /opt/ros/noetic/setup.zsh"
+alias initros2="source /opt/ros/galactic/setup.zsh"
 source ~/.zshrc
 ```
 
