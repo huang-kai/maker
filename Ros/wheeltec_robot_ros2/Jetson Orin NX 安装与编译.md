@@ -228,15 +228,20 @@ service udev reload
 sleep 2
 service udev restart
 
-sudo sh ~/dev/wheeltec_robot_ros2/src/turn_on_wheeltec_robot/wheeltec_udev.sh
+sudo sh ~/dev/wheeltec_robot_ros2/src/turn_on_wheeltec_robot/wheeltec_udev_new.sh
 
 # 插拔一下usb
 ll /dev
 # 看到 wheeltec_controller 说明映射成功
 ```
 ### 3.3 配置文件
+#### 3.3.1 相机切换
+配置文件：`src/turn_on_wheeltec_robot/launch/wheeltec_camera.launch.py`   
+选参数为：Astra_S、Astra_Pro、Dabai、Gemini
+#### 3.3.2 雷达切换
+配置文件: `src/turn_on_wheeltec_robot/launch/wheeltec_lidar.launch.py`
 
-### 3.3 启动
+### 3.4 启动
 ```
 cd ~/dev/wheeltec_robot_ros2/
 . install/setup.zsh
@@ -244,3 +249,20 @@ cd ~/dev/wheeltec_robot_ros2/
 ros2 launch turn_on_wheeltec_robot turn_on_wheeltec_robot.launch.py
 
 ```
+
+## 4 遇到过的问题
+1. QOS问题
+错误：
+```
+New publisher discovered on topic '/map', offering incompatible QoS. No messages will be received from it. Last incompatible policy: Durability
+```
+导致Rviz2无法显示地图信息。   
+
+原因：发布方和接受方的QOS不匹配，需要修改。可以使用如下命令查看topic QOS
+```
+ros2 topic info /map --verbose
+```
+修改rviz中对应的参数解决
+
+2. 地图保存失败
+原因：地图保存代码中hard code了地址，需要修改为自己的地址
