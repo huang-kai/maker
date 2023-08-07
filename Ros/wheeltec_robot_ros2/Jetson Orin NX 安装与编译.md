@@ -67,8 +67,18 @@ python3 -m pip install -U importlib-metadata importlib-resources
 
 # 设置环境变量
 vim ~/.zshrc
-# alias initros1="source /opt/ros/noetic/setup.zsh"
-alias initros2="source /opt/ros/galactic/setup.zsh"
+initros2 (){
+   # source /usr/share/colcon_cd/function/colcon_cd.sh
+   # export _colcon_cd_root=/opt/ros/galactic/
+   # source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.zsh
+
+    eval "$(register-python-argcomplete3 ros2)"
+    eval "$(register-python-argcomplete3 colcon)"
+    source /opt/ros/galactic/setup.zsh
+    export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
+    source /home/jetson/dev/ws_moveit2/install/setup.zsh
+    #source /home/jetson/dev/wheeltec_robot_ros2/install/setup.zsh
+}
 source ~/.zshrc
 ```
 

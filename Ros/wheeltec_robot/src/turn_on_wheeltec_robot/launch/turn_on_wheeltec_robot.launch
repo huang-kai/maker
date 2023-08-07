@@ -1,6 +1,6 @@
 <launch>
   <!-- Arguments参数 -->
-  <arg name="car_mode"  default="mini_mec" 
+  <arg name="car_mode"  default="mini_mec_moveit_six" 
        doc="opt: mini_akm,senior_akm,top_akm_bs,top_akm_dl,
                  mini_mec,senior_mec_bs,senior_mec_dl,top_mec_bs,top_mec_dl,senior_mec_EightDrive,top_mec_EightDrive,
                  flagship_mec_bs,flagship_mec_dl,
@@ -34,7 +34,7 @@
   <group if="$(eval (car_mode=='mini_mec_moveit_six' or car_mode=='mini_4wd_moveit_six') and if_voice==true)" >
   <!-- 开启机械臂语音相关节点  -->
   <include file="$(find wheeltec_arm_pick)/launch/base_serial.launch" >
-    <arg name="if_voice_control" value="true"/>
+    <arg name="if_voice_control" value="false"/>
     <arg name="moveit_config" value="true"/>
     <arg name="preset" value="true"/>
   </include>

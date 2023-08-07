@@ -57,6 +57,8 @@ pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
 sudo pip3 install -U jetson-stats
 jtop
 ```
+### 3.1 通过Jtop增加Swap分区
+NX默认只有3.6GB的Swap区，在编译一些程序如moveit2的时候会报错。通过`jtop`的`4MEO`可以增加swap大小。
 
 ## 4. Conda
 [conda官网](https://docs.conda.io/en/latest/miniconda.html#installing)   
