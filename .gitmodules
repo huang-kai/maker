@@ -1,0 +1,9 @@
+[submodule "Ros/wheeltec_robot/src/ros_astra_camera"]
+	path = Ros/wheeltec_robot/src/ros_astra_camera
+	url = https://github.com/orbbec/ros_astra_camera.git
+[submodule "Ros/wheeltec_robot/src/web_video_server"]
+	path = Ros/wheeltec_robot/src/web_video_server
+	url = https://github.com/RobotWebTools/web_video_server.git
+[submodule "Ros/wheeltec_robot_ros2/src/wheeltec_web_video"]
+	path = Ros/wheeltec_robot_ros2/src/wheeltec_web_video
+	url = https://github.com/RobotWebTools/web_video_server.git
