@@ -34,3 +34,10 @@ build/
 
 ### mac ###
 .DS_Store
+
+### ROS build ###
+build/
+devel/
+install/
+log/
+Log/
