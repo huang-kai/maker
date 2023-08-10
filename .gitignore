@@ -35,7 +35,8 @@ build/
 ### mac ###
 .DS_Store
 
-### ROS build ###
+### ROS ###
+.catkin_workspace
 build/
 devel/
 install/
