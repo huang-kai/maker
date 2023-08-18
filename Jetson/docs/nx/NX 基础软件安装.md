@@ -36,8 +36,18 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-m
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 
 ```
+## 2. 设置环境变量
+### 2.1 CUDA
+```
+vim ~/.zsh
 
-## 2. pip3
+...
+export PATH=/usr/local/cuda/bin:$PATH
+export LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH
+export CUDA_HOME=$CUDA_HOME:/usr/local/cuda
+```
+
+## 3. pip3
 NX 初始安装的是python3.8 和 python2.7，我们暂时不用2.7版本，所以只安装python3.8的工具
 ```
 sudo apt install -y python-is-python3
@@ -52,22 +62,22 @@ pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
 
 ```
 
-## 3. jstat
+## 4. jstat
 ```
 sudo pip3 install -U jetson-stats
 jtop
 ```
-### 3.1 通过Jtop增加Swap分区
+### 4.1 通过Jtop增加Swap分区
 NX默认只有3.6GB的Swap区，在编译一些程序如moveit2的时候会报错。通过`jtop`的`4MEO`可以增加swap大小。
 
-## 4. Conda
+## 5. Conda
 [conda官网](https://docs.conda.io/en/latest/miniconda.html#installing)   
 下载python3.8  aarch64版本
 ```
 bash ~/Downloads/Miniconda3-py38_<version>-Linux-aarch64.sh
 ```
 
-## 5. Nvidia pytorch
+## 6. Nvidia pytorch
 注意，pytorch官网的版本无法开启cuda，需要按照[Nvidia官方](https://docs.nvidia.com/deeplearning/frameworks/install-pytorch-jetson-platform/index.html)安装，这里以1.14版本举例，新版本可以从 https://developer.download.nvidia.cn/compute/redist/jp/v51/pytorch/ 寻找
 ```
 # 安装依赖包
@@ -92,5 +102,4 @@ python3 -m pip install --upgrade pip; python3 -m pip install aiohttp numpy=='1.1
 3. https://github.com/zsh-users/zsh-autosuggestions/blob/master/INSTALL.md
 4. https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md
 5. https://github.com/rbonghi/jetson_stats
-
 
