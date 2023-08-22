@@ -64,6 +64,9 @@ setuptools
 
 # 安装依赖项
 python3 -m pip install -U importlib-metadata importlib-resources
+export ROS_DISTRO=galactic
+
+sudo apt install ros-$ROS_DISTRO-rmw-cyclonedds-cpp
 
 # 设置环境变量
 vim ~/.zshrc
@@ -109,19 +112,17 @@ rosdep install --from-paths src --ignore-src -r -y --rosdistro galactic
 # 运行完成后会显示#all required rosdeps installed successfully
 
 # 安装其他依赖
-sudo apt install -y ros-galactic-usb-cam \
-                    ros-galactic-async-web-server-cpp \
-                    ros-galactic-test-msgs \
-                    ros-galactic-behaviortree-cpp-v3 \
-                    ros-galactic-ompl \
-                    ros-galactic-filters \
-                    ros-galactic-diagnostic-updater \
-                    ros-galactic-gazebo-ros-pkgs \
-                    ros-galactic-test-msgs \
-                    ros-galactic-behaviortree-cpp-v3 \
+sudo apt install -y ros-$ROS_DISTRO-usb-cam \
+                    ros-$ROS_DISTRO-async-web-server-cpp \
+                    ros-$ROS_DISTRO-test-msgs \
+                    ros-$ROS_DISTRO-behaviortree-cpp-v3 \
+                    ros-$ROS_DISTRO-ompl \
+                    ros-$ROS_DISTRO-filters \
+                    ros-$ROS_DISTRO-diagnostic-updater \
+                    ros-$ROS_DISTRO-gazebo-ros-pkgs \
+                    ros-$ROS_DISTRO-test-msgs \
+                    ros-$ROS_DISTRO-behaviortree-cpp-v3
                     
-
-
 ```
 
 ### 2.3 编译步骤
@@ -135,8 +136,8 @@ colcon build --packages-select wheeltec_rrt_msg
 #### step1 安装相机依赖
 ```
 sudo apt install libgflags-dev nlohmann-json3-dev \
-                               ros-galactic-image-transport \
-                               ros-galactic-image-publisher 
+                               ros-$ROS_DISTRO-image-transport \
+                               ros-$ROS_DISTRO-image-publisher 
 ```
 #### step2 安装其他依赖
 ```
@@ -179,7 +180,6 @@ sudo udevadm control --reload-rules && sudo udevadm trigger
 #### step4 编译
 ```
 cd ~/wheeltec_ws
-source /opt/ros/galactic/setup.bash
 colcon build --packages-select astra_camera_msgs
 colcon build --packages-select astra_camera
 ```
@@ -197,9 +197,9 @@ target, or an ALIAS target is missing?
 ## 3. 运行
 ### 3.1 安装依赖
 ```
-sudo apt install -y ros-galactic-joint-state-publisher \
-                    ros-galactic-robot-localization \
-                    ros-galactic-robot-state-publisher \
+sudo apt install -y ros-$ROS_DISTRO-joint-state-publisher \
+                    ros-$ROS_DISTRO-robot-localization \
+                    ros-$ROS_DISTRO-robot-state-publisher \
 ```
 
 ### 3.2 映射串口号
