@@ -96,6 +96,23 @@ python3 -m pip install --upgrade pip; python3 -m pip install aiohttp numpy=='1.1
  python3 -c  "import torch; print(torch.__version__); print(torch.cuda.is_available())"
  
 ```
+## 9. 删除无用软件
+```
+sudo apt remove deja-dup -y # 卸载备份工具
+# sudo apt remove remmina -y # 卸载远程工具
+sudo apt remove -y libreoffice-common # 卸载系统自带office
+# sudo apt remove -y transmission-common # 卸载自带下载器
+sudo apt remove -y aisleriot # 卸载系统自带的接龙游戏
+sudo apt remove -y gnome-mahjongg # 卸载系统自带对对碰游戏
+sudo apt remove -y gnome-mines # 卸载系统自带扫雷游戏
+sudo apt remove -y gnome-sudoku # 卸载系统自带数独游戏
+sudo apt remove -y rhythmbox # 卸载系统自带音乐播放器
+sudo apt remove -y thunderbird # 卸载系统自带的邮件工具
+
+sudo apt -y autoremove # 清理卸载软件依赖包
+
+```
+
 ## 参考
 1. https://conda.io/projects/conda/en/stable/user-guide/install/index.html
 2. https://docs.nvidia.com/deeplearning/frameworks/install-pytorch-jetson-platform/index.html
