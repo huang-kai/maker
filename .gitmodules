@@ -7,6 +7,3 @@
 [submodule "Ros/wheeltec_robot_ros2/src/wheeltec_web_video"]
 	path = Ros/wheeltec_robot_ros2/src/wheeltec_web_video
 	url = https://github.com/RobotWebTools/web_video_server.git
-[submodule "Ros/wheeltec_robot/src/darknet_ros"]
-	path = Ros/wheeltec_robot/src/darknet_ros
-	url = https://github.com/leggedrobotics/darknet_ros
