@@ -35,8 +35,8 @@ void bodyposture_Callback(bodyreader::bodyposture msg)
 		x_angle = msg.CenterOfMass_X / msg.CenterOfMass_Z;
 		distance = msg.CenterOfMass_Z;
 		}
-		//printf("x_angle=%f\n",x_angle);
-		//printf("distance=%f\n",distance);
+		printf("x_angle=%f\n",x_angle);
+		printf("distance=%f\n",distance);
 		
 		float error_x_angle = x_angle - target_x_angle;
 		float error_distance = distance - target_distance;

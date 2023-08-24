@@ -53,7 +53,7 @@ void print_color(astra_colorframe_t colorFrame)
     astra_colorframe_get_frameindex(colorFrame, &frameIndex);
 
     astra_rgb_pixel_t middle = colorData_rgb[index];
-    printf("color frameIndex: %d  r: %d    g: %d    b: %d \n", frameIndex, (int)(middle.r), (int)(middle.g), (int)(middle.b));
+    // printf("color frameIndex: %d  r: %d    g: %d    b: %d \n", frameIndex, (int)(middle.r), (int)(middle.g), (int)(middle.b));
 
     image_msgs.header.seq = frameIndex;
     image_msgs.height = metadata.height/2;
@@ -97,10 +97,10 @@ void output_body_mask(astra_bodyframe_t bodyFrame)
 
 
     const int32_t centerIndex = bodyMask.width / 2 + bodyMask.width * bodyMask.height / 2;
-    printf("Body mask: width: %d height: %d center value: %d\n",
-        bodyMask.width,
-        bodyMask.height,
-        bodyMask.data[centerIndex]);
+    // printf("Body mask: width: %d height: %d center value: %d\n",
+    //     bodyMask.width,
+    //     bodyMask.height,
+    //     bodyMask.data[centerIndex]);
     int j = 0;
     for (int i = 0; i < bodyMask.height * bodyMask.width; i++)
     {
@@ -206,7 +206,7 @@ void output_bodies(astra_bodyframe_t bodyFrame)
         bodylist_msg.bodies[i].centerOfMass.x = centerOfMass->x;
         bodylist_msg.bodies[i].centerOfMass.y = centerOfMass->y;
         bodylist_msg.bodies[i].centerOfMass.z = centerOfMass->z;
-        printf("+++++++++++++++++++++centerOfMass->z = %.1f\n", centerOfMass->z);
+        // printf("+++++++++++++++++++++centerOfMass->z = %.1f\n", centerOfMass->z);
         for(int j = 0; j < 19; ++j)
         { 
           const astra_joint_t* joint = &body->joints[j];
@@ -297,12 +297,12 @@ int main(int argc, char* argv[])
 
                 astra_frame_index_t frameIndex;
                 astra_bodyframe_get_frameindex(bodyFrame, &frameIndex);
-                printf("Frame index: %d\n", frameIndex);
+                // printf("Frame index: %d\n", frameIndex);
 
                 output_bodyframe(bodyFrame);
             }
 
-            printf("----------------------------\n");
+            // printf("----------------------------\n");
             if (rgb_stream)
             {
                 astra_colorframe_t colorFrame;

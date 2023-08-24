@@ -1,5 +1,5 @@
 <launch>
-    <arg name="camera_mode"  default="Astra_S+RgbCam" 
+    <arg name="camera_mode"  default="Astra_S" 
     doc="opt: Astra_S, Astra_Pro, Astra_Dabai,Astra_Gemini,
               RgbCam,
               Astra_S+RgbCam,Astra_Pro+RgbCam,Astra_Dabai+RgbCam,Astra_Gemini+RgbCam"/>

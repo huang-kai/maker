@@ -19,10 +19,10 @@
   </node> 
 
   <!-- 反馈（语音反馈/图像UI） -->
-  <node pkg="bodyreader" type="feedback" name="body_feedback">
+  <!-- <node pkg="bodyreader" type="feedback" name="body_feedback">
     <param name="voice_feedback" value="true" />
     <param name="interaction" value="0" />
-  </node>
+  </node> -->
   <node pkg="bodyreader" type="display.py" name="body_display" />
   <!-- <include file="$(find usb_cam)/launch/usb_cam-test.launch" /> -->
   <node pkg="bodyreader" type="image_trans" name="display_image_trans" >

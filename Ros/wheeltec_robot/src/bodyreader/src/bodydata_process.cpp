@@ -83,6 +83,9 @@ void judge_pose(bodyreader::body body)
 		}
 	}
 
+	// printf("Right hand - RIGHT_ELBOW: %.1f \n",(body.joints[RIGHT_HAND].worldPosition.y - body.joints[RIGHT_ELBOW].worldPosition.y));
+	// printf("RIGHT_SHOULDER  %.1f \n",(body.joints[RIGHT_SHOULDER].worldPosition.y - body.joints[RIGHT_ELBOW].worldPosition.y));
+	// printf("RIGHT_HAND %.1f \n",body.joints[RIGHT_HAND].worldPosition.y);
 	if((body.joints[RIGHT_HAND].worldPosition.y - body.joints[RIGHT_ELBOW].worldPosition.y) > 180
          && (body.joints[RIGHT_SHOULDER].worldPosition.y - body.joints[RIGHT_ELBOW].worldPosition.y) > 150 
          && body.joints[RIGHT_HAND].worldPosition.y > 400)
@@ -165,7 +168,7 @@ void judge_pose(bodyreader::body body)
 				if (mode_msg.data == 1) mode_msg.data = 2;
 				else if (mode_msg.data == 2) mode_msg.data = 1;
 				mode_Pub.publish(mode_msg);
-				system("aplay -D plughw:CARD=Device,DEV=0 ~/wheeltec_robot/src/bodyreader/audio/mode_switch.wav");
+				system("aplay -D plughw:CARD=Device,DEV=0 ~/dev/maker/Ros/wheeltec_robot/src/bodyreader/audio/mode_switch.wav");
 			}
 		}
 	}
