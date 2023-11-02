@@ -25,7 +25,7 @@ number_of_devices: 1
 uvc_camera.enable: true
 uvc_camera.format: "mjpeg"
 uvc_camera.vid: 0x2bc5
-uvc_camera.pid: 0x050e
+uvc_camera.pid: 0x0511
 # 打开相机可能失败，retry次数
 uvc_camera.retry_count: 100
 # 不同的分辨率对齐需要剪切和放大，所以需要设置ROI

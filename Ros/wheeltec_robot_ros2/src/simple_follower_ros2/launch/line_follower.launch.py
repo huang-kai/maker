@@ -29,6 +29,9 @@ def generate_launch_description():
             package='simple_follower_ros2', 
             executable='line_follow', 
             name='line_follow',
+            parameters=[{
+                'image_input':'/camera/color/image_raw',
+            }]
             )]
     )
 

@@ -26,15 +26,17 @@ Switch = '0:Red\n1:Green\n2:Blue\n3:Yellow\n4:Black'
 
 class Follower(Node):
     def __init__(self):
-        super().__init__('follower')
+        super().__init__('line_follow')
         self.bridge = cv_bridge.CvBridge()
         qos = QoSProfile(depth=10)
         self.mat = None
+        self.declare_parameter('image_input', '')
+        self.image_input = self.get_parameter('image_input').get_parameter_value().string_value
         self.image_sub = self.create_subscription(
             Image,
-            '/camera/color/image_raw',
+            self.image_input,
             self.image_callback,
-            qos)
+            qos) 
         self.cmd_vel_pub = self.create_publisher(Twist, 'cmd_vel', qos)
         self.twist = Twist()
         self.tmp = 0
@@ -121,9 +123,9 @@ class Follower(Node):
                 d_erro=erro-last_erro
                 self.twist.linear.x = 0.11
                 if erro<0:
-                    self.twist.angular.z = -(float(erro)*0.0011-float(d_erro)*0.0000) #top_akm_bs
+                    self.twist.angular.z = -(float(erro)*0.00102-float(d_erro)*0.0000) #top_akm_bs
                 elif erro>0:
-                    self.twist.angular.z = -(float(erro)*0.0011-float(d_erro)*0.0000) #top_akm_bs
+                    self.twist.angular.z = -(float(erro)*0.00104-float(d_erro)*0.0000) #top_akm_bs
                 else :
                     self.twist.angular.z = 0.0
                 last_erro=erro

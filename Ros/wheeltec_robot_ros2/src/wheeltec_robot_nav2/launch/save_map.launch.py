@@ -14,7 +14,7 @@ def generate_launch_description():
         output='screen',
         arguments=['-f', '/home/jetson/dev/maker/Ros/wheeltec_robot_ros2/src/wheeltec_robot_nav2/map/WHEELTEC'],
         
-        parameters=[{'save_map_timeout': 20000},
+        parameters=[{'save_map_timeout': 20000.0},
                     {'free_thresh_default': 0.196}]
 
         )

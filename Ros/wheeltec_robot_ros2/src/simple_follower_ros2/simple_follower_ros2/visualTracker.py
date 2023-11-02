@@ -25,16 +25,15 @@ class VisualTracker(Node):
 		qos = QoSProfile(depth=10)
 		self.bridge = cv_bridge.CvBridge()
 		#self.tmp_list = self.get_parameter('~targetred/upper').value
-		self.targetUpper = np.array([0, 50, 50])
-		self.targetLower = np.array([180, 255, 255])
+		self.targetLower = np.array([0, 100, 80])
+		self.targetUpper = np.array([10, 255, 255])
 		
-		#self.pictureHeight= self.get_parameter('~pictureDimensions/pictureHeight')
-		#self.pictureWidth = self.get_parameter('~pictureDimensions/pictureWidth')
+		self.declare_parameter('Height', 480) 
+		self.declare_parameter('Width', 640) 
+		self.pictureHeight= self.get_parameter('Height').get_parameter_value().integer_value
+		self.pictureWidth = self.get_parameter('Width').get_parameter_value().integer_value
 		#vertAngle =self.get_parameter('~pictureDimensions/verticalAngle')
 		#horizontalAngle =  self.get_parameter('~pictureDimensions/horizontalAngle')
-		
-		self.pictureHeight= 480
-		self.pictureWidth = 640
 		vertAngle =0.43196898986859655
 		horizontalAngle =  0.5235987755982988
 		
@@ -65,7 +64,7 @@ class VisualTracker(Node):
 		#blurred = cv2.GaussianBlur(frame, (11,11), 0)
 		hsv = cv2.cvtColor(frame, cv2.COLOR_RGB2HSV)	
 		# select all the pixels that are in the range specified by the target
-		org_mask = cv2.inRange(hsv, self.targetUpper, self.targetLower)	
+		org_mask = cv2.inRange(hsv, self.targetLower, self.targetUpper)	
 
 		# clean that up a little, the iterations are pretty much arbitrary
 		mask = cv2.erode(org_mask, None, iterations=4)		
