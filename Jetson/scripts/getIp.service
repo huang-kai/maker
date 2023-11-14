@@ -1,0 +1,10 @@
+[Unit]
+Description=getIp
+After=network.target remote-fs.target nss-lookup.target
+
+[Service]
+Type=forking
+ExecStart=python3 /home/jetson/dev/scripts/get_ip.py
+
+[Install]
+WantedBy=multi-user.target
