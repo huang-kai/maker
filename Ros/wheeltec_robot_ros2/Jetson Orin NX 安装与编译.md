@@ -153,7 +153,7 @@ sudo ldconfig
 
 # 安装magic_enum 
 cd ~/dev/git/github.com
-git clone https://github.com/Neargye/magic_enu
+git clone https://github.com/Neargye/magic_enum
 cd magic_enu
 git checkout v0.8.0
 cd magic_enum-0.8.0
