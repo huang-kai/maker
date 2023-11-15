@@ -129,6 +129,9 @@ sudo apt install -y ros-$ROS_DISTRO-usb-cam \
 ```
 # 先编译 rrt msg
 colcon build --packages-select wheeltec_rrt_msg
+colcon build --packages-select astra_camera_msgs
+. install/setup.zsh
+colcon build
 . install/setup.zsh
 ```
 
@@ -154,7 +157,7 @@ sudo ldconfig
 # 安装magic_enum 
 cd ~/dev/git/github.com
 git clone https://github.com/Neargye/magic_enum
-cd magic_enu
+cd magic_enum
 git checkout v0.8.0
 cd magic_enum-0.8.0
 mkdir build && cd build
@@ -199,7 +202,7 @@ target, or an ALIAS target is missing?
 ```
 sudo apt install -y ros-$ROS_DISTRO-joint-state-publisher \
                     ros-$ROS_DISTRO-robot-localization \
-                    ros-$ROS_DISTRO-robot-state-publisher \
+                    ros-$ROS_DISTRO-robot-state-publisher
 ```
 
 ### 3.2 映射串口号
