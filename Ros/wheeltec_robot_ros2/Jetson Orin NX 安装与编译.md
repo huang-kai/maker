@@ -121,6 +121,9 @@ sudo apt install -y ros-$ROS_DISTRO-usb-cam \
                     ros-$ROS_DISTRO-diagnostic-updater \
                     ros-$ROS_DISTRO-gazebo-ros-pkgs \
                     ros-$ROS_DISTRO-test-msgs \
+                    ros-$ROS_DISTRO-nav2-msgs \
+                    ros-$ROS_DISTRO-bondcpp \
+                    ros-$ROS_DISTRO-nav2-behavior-tree \
                     ros-$ROS_DISTRO-behaviortree-cpp-v3
                     
 ```
@@ -182,7 +185,7 @@ sudo udevadm control --reload-rules && sudo udevadm trigger
 
 #### step4 编译
 ```
-cd ~/wheeltec_ws
+cd ~/dev/wheeltec_robot_ros2
 colcon build --packages-select astra_camera_msgs
 colcon build --packages-select astra_camera
 ```
