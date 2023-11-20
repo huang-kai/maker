@@ -13,7 +13,7 @@ set(FP16_ENABLE ON)
 
 set(DOWNLOAD_YOLOV2_TINY OFF)
 set(DOWNLOAD_YOLOV3 OFF)
-set(DOWNLOAD_YOLOV4 ON)
+set(DOWNLOAD_YOLOV4 OFF)
 set(DOWNLOAD_YOLOV4_CSP ON)
 set(DOWNLOAD_YOLOV4_TINY ON)
 set(DOWNLOAD_YOLOV4_MISH OFF)
@@ -38,7 +38,7 @@ if(CUDA_ENABLE)
 endif()
 
 if (CUDA_FOUND)
-  message(STATUS "CUDA Version: ${CUDA_VERSION}")
+  message(STATUS "CUDA Version: ${CUDA_VERSION_STRINGS}")
   message(STATUS "CUDA Libararies: ${CUDA_LIBRARIES}")
   set(
     CUDA_NVCC_FLAGS
@@ -62,7 +62,7 @@ set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/../darknet/cmake/Modules/" ${CM
 
 if(CUDNN_ENABLE)
   find_package(CUDNN)
-  message(STATUS "cuDNN Version: ${CUDNN_VERSION}")
+  message(STATUS "cuDNN Version: ${CUDNN_VERSION_STRINGS}")
   message(STATUS "cuDNN Libararies: ${CUDNN_LIBRARIES}")
 endif()
 

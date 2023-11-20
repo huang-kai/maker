@@ -27,7 +27,7 @@
 #include "std_msgs/msg/header.hpp"
 #include "sensor_msgs/msg/image.hpp"
 #include "geometry_msgs/msg/point.hpp"
-#include "image_transport/image_transport.hpp"
+#include "image_transport/image_transport.h"
 
 // OpenCv
 #include <opencv2/imgproc/imgproc.hpp>
