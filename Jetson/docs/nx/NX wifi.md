@@ -13,10 +13,10 @@
 
 ## 更新 12.14
 终于迎来了jetpack 6 DP 的升级，L4T也成功升级到了ubuntu 22.04版本，内核```5.15.122-tegra```。  
-欣喜的是蓝牙部分已经完全兼容，但wifi还是不能用！根据
-https://forums.developer.nvidia.com/t/faild-to-connect-wi-fi-network-on-jetson-linux-36-2/275212/2  
-和  
-https://zhuanlan.zhihu.com/p/586474020?utm_id=0  
+欣喜的是蓝牙部分已经完全兼容，但wifi还是不能用！根据   
+https://forums.developer.nvidia.com/t/faild-to-connect-wi-fi-network-on-jetson-linux-36-2/275212/2    
+和   
+https://zhuanlan.zhihu.com/p/586474020?utm_id=0   
 中的方法，猜测在制作jetpack 6的时候没有对backports进行升级导致。着手对backports进行升级   
 
 克隆backport仓库
@@ -34,7 +34,9 @@ sudo make install
 ```
 下载驱动文件
 ```
-git clone https://kernel.googlesource.com/pub/scm/linux/kernel/git/firmware/linux-firmware
+git clone https://mirrors.tuna.tsinghua.edu.cn/git/linux-firmware.git
+# git clone https://kernel.googlesource.com/pub/scm/linux/kernel/git/firmware/linux-firmware
+
 cd linux-firmware/
 sudo cp iwlwifi-* /lib/firmware
 ```
