@@ -96,6 +96,33 @@ python3 -m pip install --upgrade pip; python3 -m pip install aiohttp numpy=='1.1
  python3 -c  "import torch; print(torch.__version__); print(torch.cuda.is_available())"
  
 ```
+## 7. 安装firefox（Ubuntu 22.04 没有默认安装的情况）
+Ubuntu 22.04 中Firefox使用的snap包，但snap包有各种缺点，本方法使用dev包安装方式。 
+```
+# Step 1 删除snap包中的Firefox如有
+snap list
+sudo snap remove --purge firefox
+
+# Step 2 添加 Mozilla team PPA 存储库
+sudo add-apt-repository ppa:mozillateam/ppa
+
+# Step 3 在 Ubuntu 22.04 LTS 上从 DEB 包安装 Firefox
+sudo apt install --target-release 'o=LP-PPA-mozillateam' firefox
+## --target-release选项可让您控制从何处下载安装包。因此，可以让apt使用mozillateam存储库作为源的命令。
+
+# Step 4 更改 PPA 优先级
+# Ubuntu 的官方仓库有版本号 1:1snap1-0ubuntu2，总是高于 PPA 包的版本。
+# 系统希望将已安装的 Firefox 版本替换为其默认存储库中具有更高优先级的版本。其结果是又将 Firefox 恢复为 Snap。
+# 因此，为避免这种情况发生，我们需要更改mozillateam存储库中数据包的优先级。为此，请运行以下命令：
+sudo vim /etc/apt/preferences.d/mozillateamppa
+
+Package: firefox*
+Pin: release o=LP-PPA-mozillateam
+Pin-Priority: 501
+
+sudo apt update
+```
+
 ## 9. 删除无用软件
 ```
 sudo apt remove deja-dup -y # 卸载备份工具
@@ -119,4 +146,5 @@ sudo apt -y autoremove # 清理卸载软件依赖包
 3. https://github.com/zsh-users/zsh-autosuggestions/blob/master/INSTALL.md
 4. https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md
 5. https://github.com/rbonghi/jetson_stats
+6. https://www.linuxmi.com/ubuntu22-04-lts-firefox-deb.html
 
